@@ -52,6 +52,31 @@ Balance for Krystina: 3516 KC
     <% wallet_balance = wallet_additions - wallet_subtractions%>
 
     <li>
-        Balance for <%=user["name"]%>: <%=wallet_balance%>
+        Balance for <%=user["name"]%>: <%=wallet_balance%> KC
     </li>
 <% end %>
+
+<p></p>
+
+<h2>Current balances but in a table</h2>
+
+<table>
+
+    <tr>
+        <th>User</th>
+        <th>Balance</th>
+    </tr>
+
+    <% for user in users %>
+
+        <% wallet_additions = Transaction.where({"to_user_id" => user["id"]}).sum("amount") %>
+        <% wallet_subtractions = Transaction.where({"from_user_id" => user["id"]}).sum("amount") %>
+        <% wallet_balance = wallet_additions - wallet_subtractions%>
+
+        <tr>
+            <td> <%=user["name"]%> </td>
+            <td> <%=wallet_balance%> KC </td>
+        </tr>
+    <% end %>
+    
+</table>
