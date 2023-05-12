@@ -628,3 +628,5 @@ transaction.save
 
 
 puts "There are now #{User.all.count} users and #{Transaction.all.count} transactions."
+puts Transaction.inspect
+puts User.inspect
